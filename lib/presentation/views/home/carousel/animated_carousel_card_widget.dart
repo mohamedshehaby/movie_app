@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../domain/entities/movie_entity.dart';
 import '../../../resources/values_manager.dart';
 import 'carousel_card_widget.dart';
 
 class AnimatedCarouselCardWidget extends StatelessWidget {
   final int index;
-  final int movieId;
-  final String posterPath;
+  final MovieEntity movie;
+
   final PageController pageController;
 
   const AnimatedCarouselCardWidget({
     super.key,
     required this.index,
-    required this.movieId,
-    required this.posterPath,
+    required this.movie,
     required this.pageController,
   });
 
@@ -53,10 +53,7 @@ class AnimatedCarouselCardWidget extends StatelessWidget {
           );
         }
       },
-      child: CarouselCardWidget(
-        movieId: movieId,
-        posterPath: posterPath,
-      ),
+      child: CarouselCardWidget(movie: movie),
     );
   }
 }

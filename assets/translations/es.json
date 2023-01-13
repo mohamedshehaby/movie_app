@@ -1,6 +1,6 @@
 {
     "favouriteMovies": "Peliculas favoritas",
-    "language": "Idioma",
+    "languages": "Idioma",
     "about": "Acerca de",
     "feedback": "Realimentación",
     "popular": "POPULAR",
@@ -30,5 +30,6 @@
     "guestSignIn": "Invitado Registrarse",
     "arabic": "Arábica",
     "english": "Inglesa",
-    "spanish": "española"
+    "spanish": "española",
+    "databaseError" : "Error retrieving data from database"
 }

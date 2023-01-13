@@ -72,10 +72,8 @@ class _CarouselPageViewState extends State<CarouselPageView> {
       itemCount: widget.movies.length,
       controller: _pageController,
       itemBuilder: (ctx, i) {
-        final movie = widget.movies[i];
         return AnimatedCarouselCardWidget(
-          movieId: movie.id,
-          posterPath: movie.posterPath,
+          movie: widget.movies[i],
           index: i,
           pageController: _pageController,
         );

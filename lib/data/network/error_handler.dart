@@ -60,6 +60,8 @@ enum ResponseStatus {
 
   noInternetConnection,
 
+  databaseError,
+
   /// Default error type, Some other Error. In this case, you can
   /// use the DioError.error if it is not null.
   unknown,
@@ -93,6 +95,12 @@ extension ResponseStatusExtensions on ResponseStatus {
           failureType: FailureType.network,
         );
 
+      case ResponseStatus.databaseError:
+        return Failure(
+            code: ResponseCode.databaseError,
+            message: ResponseMessage.databaseError.tr(),
+            failureType: FailureType.database);
+
       case ResponseStatus.unknown:
         return Failure(code: ResponseCode.unknown, message: ResponseMessage.unknown.tr());
     }
@@ -101,6 +109,9 @@ extension ResponseStatusExtensions on ResponseStatus {
 
 // Have all possible response messages that can be local from DIO or From Api
 class ResponseMessage {
+  // Database status code
+  static const String databaseError = AppStrings.comingSoon;
+
   // local status code
   static const String connectTimeout = AppStrings.timeoutError;
   static const String cancel = AppStrings.cancel;
@@ -112,6 +123,9 @@ class ResponseMessage {
 
 // Have all possible response codes that can be local from DIO or From Api
 class ResponseCode {
+  // Database status code
+  static const int databaseError = -12;
+
   // local status code
   static const int connectTimeout = -1;
   static const int cancel = -2;

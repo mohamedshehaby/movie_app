@@ -35,8 +35,8 @@ ThemeData getAppTheme() {
     disabledColor: AppColor.grey1,
     errorColor: Colors.red,
     splashColor: AppColor.lightPrimary,
-
     primarySwatch: createMaterialColor(AppColor.primary),
+    scaffoldBackgroundColor: AppColor.primary,
 
     // ExpansionTile Theme
     expansionTileTheme: ExpansionTileThemeData(
@@ -47,7 +47,7 @@ ThemeData getAppTheme() {
 
     // ProgressIndicator Theme
     progressIndicatorTheme: const ProgressIndicatorThemeData(color: AppColor.secondary),
-
+    pageTransitionsTheme: const PageTransitionsTheme(),
     // CardView Theme
     cardTheme: CardTheme(
       color: Colors.white,
@@ -66,7 +66,7 @@ ThemeData getAppTheme() {
       centerTitle: true,
       backgroundColor: AppColor.primary,
       shadowColor: AppColor.lightPrimary,
-      elevation: AppSize.s4.h,
+      elevation: 0,
       titleTextStyle: getSemiBoldTextStyle(fontSize: FontSize.s16, color: Colors.white),
     ),
 
@@ -119,8 +119,12 @@ ThemeData getAppTheme() {
       labelMedium: getMediumTextStyle(color: Colors.white, fontSize: FontSize.s12),
 
       labelSmall: getMediumTextStyle(color: AppColor.grey, fontSize: FontSize.s11),
-      bodyLarge: getMediumTextStyle(color: AppColor.lightGrey, fontSize: FontSize.s16),
-      bodyMedium: getRegularTextStyle(color: AppColor.lightGrey, fontSize: FontSize.s14),
+      bodyLarge: getMediumTextStyle(color: Colors.black, fontSize: FontSize.s16),
+
+      // [Movie Overview]
+      bodyMedium: getRegularTextStyle(color: Colors.white, fontSize: FontSize.s14),
+
+      // [Cast Character ]
       bodySmall: getRegularTextStyle(color: AppColor.grey2, fontSize: FontSize.s12),
     ),
 
@@ -137,7 +141,7 @@ ThemeData getAppTheme() {
       // enabled border
       enabledBorder: _getOutlineInputBorder(color: AppColor.darkPrimary),
       // focused border
-      focusedBorder: _getOutlineInputBorder(color: AppColor.primary),
+      focusedBorder: _getOutlineInputBorder(color: AppColor.lightPrimary),
       // error border
       errorBorder: _getOutlineInputBorder(color: Colors.red),
       // focused error border

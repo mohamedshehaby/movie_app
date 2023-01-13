@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/presentation/widgets/logo.dart';
 
 import '../resources/resources.dart';
+import '../views/search/custom_search_delegate.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -29,7 +30,9 @@ class CustomAppBar extends StatelessWidget {
             child: Logo(height: AppSize.s24.h),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: CustomSearchDelegate());
+            },
             icon: Icon(
               Icons.search,
               color: Colors.white,

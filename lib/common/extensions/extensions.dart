@@ -5,7 +5,17 @@ extension NonNullString on String? {
 }
 
 extension NonNullInteger on int? {
-  int get orZero => this == null ? Constants.zero : this!;
+  int get orZero => this == null ? Constants.intZero : this!;
+}
+
+extension NonNullDouble on double? {
+  double get orZero => this == null ? Constants.doubleZero : this!;
+}
+
+extension ConvertNumToPercentageString on num? {
+  String convertToPercentageString() {
+    return '${((this ?? 0) * 10).toStringAsFixed(0)}%';
+  }
 }
 
 extension TrimString on String {

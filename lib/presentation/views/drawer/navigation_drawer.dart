@@ -37,7 +37,7 @@ class NavigationDrawer extends StatelessWidget {
             ),
             NavigationListItem(
               title: AppStrings.favouriteMovies.tr(),
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed(Routes.favourites),
             ),
             NavigationExpandedListItem(
               title: AppStrings.languages.tr(),

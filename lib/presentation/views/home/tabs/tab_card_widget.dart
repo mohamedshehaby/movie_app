@@ -5,6 +5,7 @@ import 'package:movie_app/common/extensions/extensions.dart';
 import 'package:movie_app/domain/entities/entities.dart';
 
 import '../../../../data/core/api_constants.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../resources/values_manager.dart';
 
 class TabCardWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class TabCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.of(context).pushNamed(Routes.movieDetailsRoute, arguments: movie),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

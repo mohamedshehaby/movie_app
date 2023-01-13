@@ -39,4 +39,5 @@ class AppStrings {
   static const String noInternetError = 'checkNetwork';
   static const String noNetwork = 'noNetwork';
   static const String sessionDenied = 'sessionDenied';
+  static const String databaseError = 'databaseError';
 }

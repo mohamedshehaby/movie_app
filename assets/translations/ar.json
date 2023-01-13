@@ -30,5 +30,7 @@
   "noRouteFound": "لا يوجد مسار",
   "arabic": "العربية",
   "english": "الانجليزية",
-  "spanish": "الاسبانية"
+  "spanish": "الاسبانية",
+  "databaseError" : "Error retrieving data from database"
+
 }

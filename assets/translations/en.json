@@ -31,5 +31,6 @@
     "guestSignIn": "Guest Sign In",
     "arabic": "Arabic",
     "english": "English",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "databaseError" : "Error retrieving data from database"
 }
