@@ -6,14 +6,17 @@ part of 'videos_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VideosResponseModel _$VideosResponseModelFromJson(Map<String, dynamic> json) => VideosResponseModel(
-      videos: (json['results'] as List<dynamic>?)
+VideosResponseModel _$VideosResponseModelFromJson(Map<String, dynamic> json) =>
+    VideosResponseModel(
+      results: (json['results'] as List<dynamic>?)
           ?.map((e) => VideoModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$VideosResponseModelToJson(VideosResponseModel instance) => <String, dynamic>{
-      'videos': instance.videos,
+Map<String, dynamic> _$VideosResponseModelToJson(
+        VideosResponseModel instance) =>
+    <String, dynamic>{
+      'results': instance.results,
     };
 
 VideoModel _$VideoModelFromJson(Map<String, dynamic> json) => VideoModel(
@@ -29,7 +32,8 @@ VideoModel _$VideoModelFromJson(Map<String, dynamic> json) => VideoModel(
       id: json['id'] as String?,
     );
 
-Map<String, dynamic> _$VideoModelToJson(VideoModel instance) => <String, dynamic>{
+Map<String, dynamic> _$VideoModelToJson(VideoModel instance) =>
+    <String, dynamic>{
       'iso_639_1': instance.iso6391,
       'iso_3166_1': instance.iso31661,
       'name': instance.name,

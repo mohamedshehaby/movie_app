@@ -16,6 +16,11 @@ class NavigationExpandedListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double baseClass = 42; // we assigned an `int` to `num`, this is valid
+    // UNSAFE! We assigned `num` to `double`. This is valid with `implicit-cast` only.
+    // This will crash at runtime, as `baseClass` contains an `int` here.
+    num concreteClass = baseClass;
+
     return ExpansionTile(
       title: Text(
         title,

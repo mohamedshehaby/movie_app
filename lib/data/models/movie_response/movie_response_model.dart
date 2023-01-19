@@ -5,10 +5,10 @@ part 'movie_response_model.g.dart';
 
 @JsonSerializable()
 class MovieResponseModel {
-  final List<MovieModel>? movies;
+  final List<MovieModel>? results;
 
   MovieResponseModel({
-    this.movies,
+    this.results,
   });
 
   factory MovieResponseModel.fromJson(Map<String, dynamic> json) =>

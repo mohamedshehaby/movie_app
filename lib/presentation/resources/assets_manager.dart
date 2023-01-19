@@ -1,5 +1,6 @@
 const String imagePath = 'assets/images';
 const String jsonPath = 'assets/json';
+const String animationPath = 'assets/animations';
 
 class ImageAssets {
   // Images
@@ -16,4 +17,8 @@ class ImageAssets {
 
 class JsonAssets {
   // static const String loading = '$jsonPath/loading.json';
+}
+
+class AnimationAssets {
+  static const String loading = '$animationPath/loading_circle.flr';
 }

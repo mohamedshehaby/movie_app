@@ -6,14 +6,16 @@ part of 'movie_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MovieResponseModel _$MovieResponseModelFromJson(Map<String, dynamic> json) => MovieResponseModel(
-      movies: (json['results'] as List<dynamic>?)
+MovieResponseModel _$MovieResponseModelFromJson(Map<String, dynamic> json) =>
+    MovieResponseModel(
+      results: (json['results'] as List<dynamic>?)
           ?.map((e) => MovieModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$MovieResponseModelToJson(MovieResponseModel instance) => <String, dynamic>{
-      'movies': instance.movies,
+Map<String, dynamic> _$MovieResponseModelToJson(MovieResponseModel instance) =>
+    <String, dynamic>{
+      'results': instance.results,
     };
 
 MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
@@ -26,7 +28,8 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
       overview: json['overview'] as String?,
       posterPath: json['poster_path'] as String?,
       mediaType: json['media_type'] as String?,
-      genreIds: (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      genreIds:
+          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       popularity: (json['popularity'] as num?)?.toDouble(),
       releaseDate: json['release_date'] as String?,
       video: json['video'] as bool?,
@@ -34,7 +37,8 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$MovieModelToJson(MovieModel instance) => <String, dynamic>{
+Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
+    <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'id': instance.id,

@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/common/languages_manager.dart';
 import 'package:wiredash/wiredash.dart';
 
 import '../../../common/strings_manager.dart';
+import '../../blocs/auth/auth_bloc.dart';
 import '../../resources/resources.dart';
 import '../../widgets/app_dialog.dart';
 import '../../widgets/logo.dart';
@@ -37,7 +39,7 @@ class NavigationDrawer extends StatelessWidget {
             ),
             NavigationListItem(
               title: AppStrings.favouriteMovies.tr(),
-              onPressed: () => Navigator.of(context).pushNamed(Routes.favourites),
+              onPressed: () => Navigator.of(context).pushNamed(Routes.favouritesRoute),
             ),
             NavigationExpandedListItem(
               title: AppStrings.languages.tr(),
@@ -58,6 +60,16 @@ class NavigationDrawer extends StatelessWidget {
               title: AppStrings.about.tr(),
               onPressed: () => _showDialog(context),
             ),
+            BlocListener<AuthBloc, AuthState>(
+              listenWhen: (previous, current) => current is AuthLogoutState,
+              listener: (context, state) {
+                Navigator.of(context).pushNamedAndRemoveUntil(Routes.loginRoute, (_) => false);
+              },
+              child: NavigationListItem(
+                title: AppStrings.logout.tr(),
+                onPressed: () => context.read<AuthBloc>().add(AuthLogoutEvent()),
+              ),
+            )
           ],
         ),
       ),

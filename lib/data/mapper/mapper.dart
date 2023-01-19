@@ -2,8 +2,6 @@ import 'package:movie_app/common/extensions/extensions.dart';
 import 'package:movie_app/data/models/models.dart';
 import 'package:movie_app/domain/entities/entities.dart';
 
-import '../../domain/entities/movie_entity.dart';
-import '../../domain/entities/video_entity.dart';
 import '../models/credits_response/credits_response_model.dart';
 import '../models/vidoes_response/videos_response_model.dart';
 

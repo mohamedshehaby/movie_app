@@ -30,14 +30,15 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     on<CheckIfFavouriteMovieEvent>(_onCheckIfFavouriteMovie);
   }
 
-  _onLoadFavouriteMovies(LoadFavouriteMoviesEvent event, Emitter<FavouriteState> emit) async {
+  void _onLoadFavouriteMovies(LoadFavouriteMoviesEvent event, Emitter<FavouriteState> emit) async {
     (await getFavouriteMoviesUseCase(NoParams())).fold(
       (failure) => emit(FavouriteFailureState(failure: failure)),
       (movies) => emit(FavouriteMoviesLoadedState(movies: movies)),
     );
   }
 
-  _onDeleteFavouriteMovie(DeleteFavouriteMovieEvent event, Emitter<FavouriteState> emit) async {
+  void _onDeleteFavouriteMovie(
+      DeleteFavouriteMovieEvent event, Emitter<FavouriteState> emit) async {
     await deleteFavouriteMovieUseCase(MovieParams(id: event.movieId));
     add(LoadFavouriteMoviesEvent());
   }

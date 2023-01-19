@@ -6,6 +6,7 @@ import 'package:movie_app/common/enums.dart';
 import 'package:movie_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movie_app/presentation/views/home/tabs/tab_title_widget.dart';
 import 'package:movie_app/presentation/widgets/app_error_widget.dart';
+import 'package:movie_app/presentation/widgets/loading_circle.dart';
 
 import '../../../../common/strings_manager.dart';
 import '../../../resources/values_manager.dart';
@@ -41,9 +42,7 @@ class TabbedWidget extends StatelessWidget {
             builder: (context, state) {
               if (state is MovieTabbedLoadingState) {
                 return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: LoadingCircle(),
                 );
               }
 
@@ -78,7 +77,7 @@ class TabbedWidget extends StatelessWidget {
     );
   }
 
-  _onTitleTapped(BuildContext context, MoviesType type) {
+  void _onTitleTapped(BuildContext context, MoviesType type) {
     context.read<MovieTabbedBloc>().add(MovieTabbedChangedEvent(moviesType: type));
   }
 }

@@ -4,10 +4,10 @@ part 'videos_response_model.g.dart';
 
 @JsonSerializable()
 class VideosResponseModel {
-  final List<VideoModel>? videos;
+  final List<VideoModel>? results;
 
   VideosResponseModel({
-    this.videos,
+    this.results,
   });
 
   factory VideosResponseModel.fromJson(Map<String, dynamic> json) =>

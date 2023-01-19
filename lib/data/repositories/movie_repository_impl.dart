@@ -28,7 +28,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> getTrending() async {
     if (await _networkInfo.isConnected) {
       try {
-        final movies = (await _remoteDataSource.getTrending()).movies;
+        final movies = (await _remoteDataSource.getTrending()).results;
         return Right(movies.toEntity());
       } catch (e) {
         return Left(handleError(e));
@@ -42,7 +42,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> getComingSoon() async {
     if (await _networkInfo.isConnected) {
       try {
-        final movies = (await _remoteDataSource.getComingSoon()).movies;
+        final movies = (await _remoteDataSource.getComingSoon()).results;
         return Right(movies.toEntity());
       } catch (e) {
         return Left(handleError(e));
@@ -56,7 +56,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> getPlayingNow() async {
     if (await _networkInfo.isConnected) {
       try {
-        final movies = (await _remoteDataSource.getPlayingNow()).movies;
+        final movies = (await _remoteDataSource.getPlayingNow()).results;
         return Right(movies.toEntity());
       } catch (e) {
         return Left(handleError(e));
@@ -70,7 +70,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> getPopular() async {
     if (await _networkInfo.isConnected) {
       try {
-        final movies = (await _remoteDataSource.getPopular()).movies;
+        final movies = (await _remoteDataSource.getPopular()).results;
         return Right(movies.toEntity());
       } catch (e) {
         return Left(handleError(e));
@@ -98,7 +98,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<VideoEntity>>> getVideos(int id) async {
     if (await _networkInfo.isConnected) {
       try {
-        final videos = (await _remoteDataSource.getVideos(id)).videos;
+        final videos = (await _remoteDataSource.getVideos(id)).results;
         return Right(videos.toEntity());
       } catch (e) {
         return Left(handleError(e));
@@ -112,7 +112,7 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> searchMovie(String movieName) async {
     if (await _networkInfo.isConnected) {
       try {
-        final movies = (await _remoteDataSource.searchMovie(movieName)).movies;
+        final movies = (await _remoteDataSource.searchMovie(movieName)).results;
         return Right(movies.toEntity());
       } catch (e) {
         return Left(handleError(e));

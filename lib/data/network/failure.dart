@@ -15,4 +15,4 @@ class Failure extends Equatable {
   List<Object> get props => [code, message, failureType];
 }
 
-enum FailureType { api, network, database }
+enum FailureType { api, network, database, unAuthorized, sessionDenied }

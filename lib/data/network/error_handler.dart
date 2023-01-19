@@ -32,6 +32,13 @@ Failure _handleDioError(DioError error) {
       String? statusMessage = error.response?.statusMessage;
 
       if (statusCode != null && statusMessage != null) {
+        if (statusCode == 401 || statusCode == 404) {
+          return Failure(
+            code: statusCode,
+            message: ResponseMessage.unAuthorized,
+            failureType: FailureType.unAuthorized,
+          );
+        }
         return Failure(code: statusCode, message: statusMessage);
       } else {
         return ResponseStatus.unknown.getFailure();
@@ -61,6 +68,8 @@ enum ResponseStatus {
   noInternetConnection,
 
   databaseError,
+
+  sessionDenied,
 
   /// Default error type, Some other Error. In this case, you can
   /// use the DioError.error if it is not null.
@@ -97,9 +106,17 @@ extension ResponseStatusExtensions on ResponseStatus {
 
       case ResponseStatus.databaseError:
         return Failure(
-            code: ResponseCode.databaseError,
-            message: ResponseMessage.databaseError.tr(),
-            failureType: FailureType.database);
+          code: ResponseCode.databaseError,
+          message: ResponseMessage.databaseError.tr(),
+          failureType: FailureType.database,
+        );
+
+      case ResponseStatus.sessionDenied:
+        return const Failure(
+          code: ResponseCode.sessionDenied,
+          message: ResponseMessage.sessionDenied,
+          failureType: FailureType.sessionDenied,
+        );
 
       case ResponseStatus.unknown:
         return Failure(code: ResponseCode.unknown, message: ResponseMessage.unknown.tr());
@@ -109,23 +126,22 @@ extension ResponseStatusExtensions on ResponseStatus {
 
 // Have all possible response messages that can be local from DIO or From Api
 class ResponseMessage {
-  // Database status code
-  static const String databaseError = AppStrings.comingSoon;
-
-  // local status code
+  // local status message
   static const String connectTimeout = AppStrings.timeoutError;
   static const String cancel = AppStrings.cancel;
   static const String receiveTimeout = AppStrings.timeoutError;
   static const String sendTimeout = AppStrings.timeoutError;
   static const String noInternetConnection = AppStrings.noInternetError;
   static const String unknown = AppStrings.unknownError;
+
+  static const String databaseError = AppStrings.comingSoon;
+  static const String sessionDenied = AppStrings.sessionDenied;
+
+  static const String unAuthorized = AppStrings.wrongUsernamePassword;
 }
 
 // Have all possible response codes that can be local from DIO or From Api
 class ResponseCode {
-  // Database status code
-  static const int databaseError = -12;
-
   // local status code
   static const int connectTimeout = -1;
   static const int cancel = -2;
@@ -133,4 +149,7 @@ class ResponseCode {
   static const int sendTimeout = -4;
   static const int noInternetConnection = -6;
   static const int unknown = -7;
+
+  static const int databaseError = -12;
+  static const int sessionDenied = -8;
 }

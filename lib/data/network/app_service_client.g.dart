@@ -26,8 +26,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -49,8 +49,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -72,8 +72,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -95,8 +95,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -121,8 +121,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CreditsResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<CreditsResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -147,8 +147,8 @@ class _AppServiceClient implements AppServiceClient {
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideosResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<VideosResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -176,8 +176,8 @@ class _AppServiceClient implements AppServiceClient {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MovieResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -190,6 +190,112 @@ class _AppServiceClient implements AppServiceClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MovieResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RequestTokenModel> createRequestToken(apiKey) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RequestTokenModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/authentication/token/new',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RequestTokenModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RequestTokenModel> createSessionWithLogin(
+    body,
+    apiKey,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RequestTokenModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/authentication/token/validate_with_login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RequestTokenModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SessionResponseModel> createSession(
+    body,
+    apiKey,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<SessionResponseModel>(
+        Options(
+          method: 'POST',
+          headers: _headers,
+          extra: _extra,
+        )
+            .compose(
+              _dio.options,
+              '/authentication/token/validate_with_login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl),
+      ),
+    );
+    final value = SessionResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<bool> deleteSessionId(
+    body,
+    apiKey,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<bool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'authentication/session',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data?['success'] ?? false;
     return value;
   }
 

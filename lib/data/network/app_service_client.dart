@@ -4,6 +4,8 @@ import 'package:movie_app/data/models/credits_response/credits_response_model.da
 import 'package:movie_app/data/models/models.dart';
 import 'package:retrofit/http.dart';
 
+import '../models/request_token_response/request_token_model.dart';
+import '../models/session_response/session_response_model.dart';
 import '../models/vidoes_response/videos_response_model.dart';
 
 part 'app_service_client.g.dart';
@@ -35,4 +37,18 @@ abstract class AppServiceClient {
     @Query('api_key') String apiKey,
     @Query('query') String movieName,
   );
+
+  @GET(ApiConstants.createRequestToken)
+  Future<RequestTokenModel> createRequestToken(@Query('api_key') String apiKey);
+
+  @POST(ApiConstants.createSessionWithLogin)
+  Future<RequestTokenModel> createSessionWithLogin(
+      @Body() Map<String, dynamic> body, @Query('api_key') String apiKey);
+
+  @POST(ApiConstants.createSessionWithLogin)
+  Future<SessionResponseModel> createSession(
+      @Body() Map<String, dynamic> body, @Query('api_key') String apiKey);
+
+  @POST(ApiConstants.deleteSessionId)
+  Future<bool> deleteSessionId(@Body() Map<String, dynamic> body, @Query('api_key') String apiKey);
 }

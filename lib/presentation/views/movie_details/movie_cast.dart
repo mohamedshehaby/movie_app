@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/presentation/widgets/loading_circle.dart';
 
 import '../../../common/strings_manager.dart';
 import '../../blocs/movie_cast/movie_cast_bloc.dart';
@@ -18,9 +19,7 @@ class MovieCast extends StatelessWidget {
     return BlocBuilder<MovieCastBloc, MovieCastState>(
       builder: (context, state) {
         if (state is MovieCastLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const LoadingCircle();
         } else if (state is MovieCastFailureState) {
           return AppErrorWidget(
             failure: state.failure,

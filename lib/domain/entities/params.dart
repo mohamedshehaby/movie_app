@@ -30,3 +30,24 @@ class MovieSearchParams extends Params {
   @override
   List<Object> get props => [movieName];
 }
+
+class LoginRequestParams extends Params {
+  final String username;
+  final String password;
+
+  const LoginRequestParams({
+    required this.username,
+    required this.password,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'username': username,
+      'password': password,
+    };
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [username, password];
+}

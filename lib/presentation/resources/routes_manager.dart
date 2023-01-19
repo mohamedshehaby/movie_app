@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/domain/entities/entities.dart';
@@ -13,21 +12,25 @@ import '../blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import '../blocs/movie_carousel/movie_carousel_bloc.dart';
 import '../views/favourite/favourite_view.dart';
 import '../views/home/home_view.dart';
+import '../views/login/login_view.dart';
 import '../views/movie_details/movie_details_view.dart';
+import '../views/splash/splash_view.dart';
 import '../views/videos_view/videos_view.dart';
 
 class Routes {
   static const String homeRoute = '/home';
   static const String movieDetailsRoute = '/movie-details';
   static const String trailersRoute = '/watch-trailers';
-  static const String favourites = '/favourites';
+  static const String favouritesRoute = '/favourites';
+  static const String loginRoute = '/login';
+  static const String splashRoute = '/splash';
 }
 
 class RoutesGenerator {
   static Route getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.homeRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<HomeView>(
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider<MovieCarouselBloc>(
@@ -53,25 +56,31 @@ class RoutesGenerator {
           type: PageTransitionType.fade,
         );
       case Routes.trailersRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<VideosView>(
           builder: (_) => VideosView(
             videos: settings.arguments as List<VideoEntity>,
           ),
         );
-      case Routes.favourites:
+      case Routes.favouritesRoute:
         return customPageTransition(
           child: BlocProvider<FavouriteBloc>(
             create: (context) => instance<FavouriteBloc>()..add(LoadFavouriteMoviesEvent()),
             child: const FavouritesView(),
           ),
         );
+      case Routes.loginRoute:
+        return customPageTransition(
+          child: const LoginView(),
+        );
+      case Routes.splashRoute:
+        return MaterialPageRoute<SplashView>(builder: (_) => const SplashView());
       default:
         return _unKnownRoute();
     }
   }
 
   static Route _unKnownRoute() {
-    return MaterialPageRoute(
+    return MaterialPageRoute<Widget>(
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
@@ -86,8 +95,9 @@ class RoutesGenerator {
   }
 }
 
-PageTransition customPageTransition({required Widget child, type = PageTransitionType.fade}) {
-  return PageTransition(child: child, type: type);
+PageTransition customPageTransition(
+    {required Widget child, PageTransitionType type = PageTransitionType.fade}) {
+  return PageTransition<Widget>(child: child, type: type);
 }
 
 // // To make a custom animation when routing

@@ -18,9 +18,16 @@ import 'package:movie_app/domain/usecases/usecases.dart';
 import 'package:movie_app/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movie_app/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 
+import '../data/data_sources/auth_local_data_source.dart';
+import '../data/data_sources/auth_remote_data_souce.dart';
 import '../data/data_sources/movie_local_data_source.dart';
+import '../data/repositories/auth_repository_impl.dart';
+import '../domain/repositories/auth_repository.dart';
 import '../domain/usecases/get_movie_cast_usecase.dart';
 import '../domain/usecases/get_movie_videos_usecase.dart';
+import '../domain/usecases/login_user_usecase.dart';
+import '../domain/usecases/logout_user_usecase.dart';
+import '../presentation/blocs/auth/auth_bloc.dart';
 import '../presentation/blocs/favourite_bloc/favourite_bloc.dart';
 import '../presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import '../presentation/blocs/movie_cast/movie_cast_bloc.dart';
@@ -42,9 +49,19 @@ Future init() async {
     () => MovieRemoteDataSourceImpl(appServiceClient: instance()),
   );
 
+  /// [AuthRemoteDataSource]
+  instance.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(appServiceClient: instance()),
+  );
+
   /// [MovieLocalDataSource]
   instance.registerLazySingleton<MovieLocalDataSource>(
     () => MovieLocalDataSourceImpl(),
+  );
+
+  /// [AuthLocalDataSource]
+  instance.registerLazySingleton<AuthLocalDataSource>(
+    () => AuthLocalDataSourceImpl(),
   );
 
   /// [NetworkInfo]
@@ -59,6 +76,9 @@ Future init() async {
       localDataSource: instance(),
     ),
   );
+
+  instance.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
+      authRemoteDataSource: instance(), authLocalDataSource: instance(), networkInfo: instance()));
 
   /// [UseCases]
   instance.registerLazySingleton<GetPopularMoviesUseCase>(
@@ -105,12 +125,19 @@ Future init() async {
     () => SearchMovieUseCase(movieRepository: instance()),
   );
 
+  instance.registerLazySingleton<LoginUserUseCase>(
+    () => LoginUserUseCase(authRepository: instance()),
+  );
+  instance.registerLazySingleton<LogoutUserUseCase>(
+    () => LogoutUserUseCase(authRepository: instance()),
+  );
+
   /// [Blocs]
-  instance.registerLazySingleton(() => MovieCarouselBloc(getTrendingMoviesUseCase: instance()));
+  instance.registerFactory(() => MovieCarouselBloc(getTrendingMoviesUseCase: instance()));
 
-  instance.registerLazySingleton(() => MovieBackdropBloc());
+  instance.registerFactory(() => MovieBackdropBloc());
 
-  instance.registerLazySingleton(
+  instance.registerFactory(
     () => MovieTabbedBloc(
       getPopularMoviesUseCase: instance(),
       getPlayingNowMoviesUseCase: instance(),
@@ -131,6 +158,9 @@ Future init() async {
       instance(),
     ),
   );
+
+  instance
+      .registerFactory(() => AuthBloc(loginUserUseCase: instance(), logoutUserUseCase: instance()));
 
   /// [Logging]
   if (kDebugMode) {

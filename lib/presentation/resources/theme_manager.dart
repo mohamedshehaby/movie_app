@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'resources.dart';
 
 MaterialColor createMaterialColor(Color color) {
-  List strengths = <double>[.05];
+  var strengths = <double>[.05];
   Map<int, Color> swatch = {};
   final int r = color.red, g = color.green, b = color.blue;
 
@@ -131,7 +131,7 @@ ThemeData getAppTheme() {
     // Form Field Theme
     inputDecorationTheme: InputDecorationTheme(
       // content padding
-      contentPadding: const EdgeInsets.all(AppPadding.p8),
+      contentPadding: const EdgeInsets.all(AppPadding.p12),
       // hint style
       hintStyle: getRegularTextStyle(color: AppColor.grey, fontSize: FontSize.s14),
       // label style
@@ -139,9 +139,9 @@ ThemeData getAppTheme() {
       // error style
       errorStyle: getRegularTextStyle(color: Colors.red),
       // enabled border
-      enabledBorder: _getOutlineInputBorder(color: AppColor.darkPrimary),
+      enabledBorder: _getOutlineInputBorder(color: AppColor.grey),
       // focused border
-      focusedBorder: _getOutlineInputBorder(color: AppColor.lightPrimary),
+      focusedBorder: _getOutlineInputBorder(color: AppColor.secondary),
       // error border
       errorBorder: _getOutlineInputBorder(color: Colors.red),
       // focused error border

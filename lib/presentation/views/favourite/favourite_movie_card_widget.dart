@@ -40,23 +40,18 @@ class FavoriteMovieCardWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                right: AppSize.s12.w,
-                child: Padding(
-                  padding: EdgeInsets.all(0),
-                  child: IconButton(
-                    onPressed: () {
-                      context
-                          .read<FavouriteBloc>()
-                          .add(DeleteFavouriteMovieEvent(movieId: movie.id));
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      size: AppSize.s12.h,
-                      color: Colors.white,
-                    ),
+                right: AppSize.s2.w,
+                child: IconButton(
+                  onPressed: () {
+                    context.read<FavouriteBloc>().add(DeleteFavouriteMovieEvent(movieId: movie.id));
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    size: AppSize.s32.h,
+                    color: Colors.red,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

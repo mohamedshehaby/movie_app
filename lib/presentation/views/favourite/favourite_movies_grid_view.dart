@@ -22,8 +22,8 @@ class FavoriteMovieGridView extends StatelessWidget {
         itemCount: movies.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.7,
-          crossAxisSpacing: AppSize.s16.w,
+          childAspectRatio: 0.65,
+          crossAxisSpacing: AppSize.s12.w,
         ),
         itemBuilder: (context, index) {
           return FavoriteMovieCardWidget(
